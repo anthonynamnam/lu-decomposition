@@ -14,7 +14,7 @@ class Matrix:
                 for j in range(n_col):
 
                     try:
-                        row_val.append(two_d_array[i][j])
+                        row_val.append(float(two_d_array[i][j]))
                     except:
                         row_val.append(0)
                 self.values.append(row_val)
@@ -22,19 +22,23 @@ class Matrix:
             for i in range(n_col):
                 row_val = []
                 for j in range(n_row):
-                    row_val.append(0)
+                    row_val.append(0.0)
                 self.values.append(row_val)
 
     def print_shape(self):
         print(f"Matrix Shape: ({self.n_col},{self.n_row})")
 
-    def print_values(self):
+    def print_values(self, matrix_name = ""):
+        if len(matrix_name) > 0:
+            print(f"{matrix_name}:")
         for row in self.values:
-            print(row)
+            for row_val in row:
+                print(f"{row_val}\t", end="")
+            print("")
         print("")
 
     def set_values(self, values, row_pos, col_pos):
-        self.values[row_pos][col_pos] = values
+        self.values[row_pos][col_pos] = float(values)
 
     def set_diagonal(self, values=1):
         assert self.n_col == self.n_row, "set_diagonal only available to square matrix"
@@ -48,7 +52,7 @@ def LU(M: Matrix) -> tuple():
     # Initize L and U Matrix
     L = Matrix(new_M.n_col, new_M.n_row)
     for i in range(new_M.n_col):
-        L.set_diagonal(1)
+        L.set_diagonal(1.0)
 
     U = Matrix(new_M.n_col, new_M.n_row)
     for i in range(3):
