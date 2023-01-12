@@ -1,13 +1,19 @@
 import Matrix
 
-# ----- Example 1 -----
+# ----- Example -----
 # Create the matrix
-a = Matrix.Matrix(3, 3, two_d_array=[[2, -1, -2], [-4, 6, 3], [-4, -2, 8]])
+A = Matrix.Matrix(
+    n_row=3,
+    n_col=3,
+    two_d_array=[[2, -1, -2], [-4, 6, 3], [-4, -2, 8]],
+)
 
 # Print the matrix A
-a.print_values(matrix_name = "A")
+A.print_values(matrix_name="A")
+
 # Perform LU decomposition
-(x, y) = Matrix.LU(a)
+(L, U) = Matrix.LU(A, print_step=False)
+
 # Print the LU decomposition result, i.e. Matrix L and U
-x.print_values(matrix_name = "L")
-y.print_values(matrix_name = "U")
+L.print_values(matrix_name="L")
+U.print_values(matrix_name="U")

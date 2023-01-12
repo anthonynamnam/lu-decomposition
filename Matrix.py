@@ -1,5 +1,9 @@
+import numpy as np
+
+
 class Matrix:
     values = []
+    determinant = None
 
     def __init__(self, n_row, n_col, all_zero=True, two_d_array=None):
         self.values = []
@@ -25,10 +29,15 @@ class Matrix:
                     row_val.append(0.0)
                 self.values.append(row_val)
 
+        self.calculate_determinant()
+
+    def calculate_determinant(self):
+        self.determinant = np.linalg.det(np.array(self.values))
+
     def print_shape(self):
         print(f"Matrix Shape: ({self.n_col},{self.n_row})")
 
-    def print_values(self, matrix_name = ""):
+    def print_values(self, matrix_name=""):
         if len(matrix_name) > 0:
             print(f"{matrix_name}:")
         for row in self.values:
@@ -37,36 +46,50 @@ class Matrix:
             print("")
         print("")
 
-    def set_values(self, values, row_pos, col_pos):
-        self.values[row_pos][col_pos] = float(values)
-
     def set_diagonal(self, values=1):
         assert self.n_col == self.n_row, "set_diagonal only available to square matrix"
         for i in range(self.n_col):
-            self.set_values(values, i, i)
+            self.values[i][i] = values
 
 
-def LU(M: Matrix) -> tuple():
-    assert M.n_col == M.n_row
-    new_M = Matrix(M.n_row, M.n_col, two_d_array=M.values)
-    # Initize L and U Matrix
-    L = Matrix(new_M.n_col, new_M.n_row)
-    for i in range(new_M.n_col):
-        L.set_diagonal(1.0)
+def LU(M: Matrix, print_step=False) -> tuple():
+    # Check if the martix is square matrix
+    assert M.n_col == M.n_row, "This matrix is not a square matrix"
+    assert M.determinant != 0, "Determinant of this matrix = 0"
 
-    U = Matrix(new_M.n_col, new_M.n_row)
-    for i in range(3):
-        print(f"Iteration {i+1}:")
-        new_M.print_values()
+    for i in range(M.n_col):
         # Assign diagonal value
-        U.values[i][i] = new_M.values[i][i]
+        M.values[i][i] = M.values[i][i]
 
-        for j in range(i + 1, new_M.n_col):
-            L.values[j][i] = new_M.values[j][i] / U.values[i][i]
-            U.values[i][j] = new_M.values[i][j]
+        # Step a
+        for j in range(i + 1, M.n_col):
+            M.values[j][i] = M.values[j][i] / M.values[i][i]
+            M.values[i][j] = M.values[i][j]
 
-        for j in range(i + 1, new_M.n_col):
-            for k in range(i + 1, new_M.n_row):
-                new_M.values[j][k] -= L.values[j][i] * U.values[i][k]
+        if print_step:
+            print(f"After Iteration {i+1}a:")
+            M.print_values()
+
+        # Step b
+        for j in range(i + 1, M.n_col):
+            for k in range(i + 1, M.n_row):
+                M.values[j][k] -= M.values[j][i] * M.values[i][k]
+
+        if print_step:
+            print(f"After Iteration {i+1}b:")
+            M.print_values()
+
+    # Split it into L and U
+    L = Matrix(M.n_row, M.n_col)
+    L.set_diagonal()
+
+    U = Matrix(M.n_row, M.n_col)
+
+    for i in range(M.n_row):
+        for j in range(M.n_col):
+            if i <= j:
+                U.values[i][j] = M.values[i][j]
+            else:
+                L.values[i][j] = M.values[i][j]
 
     return (L, U)
