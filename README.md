@@ -1,5 +1,6 @@
 # LU Decomposition Example
- Source code for article: https://medium.com/@kwokanthony/lu-decomposition-with-3x3-matrix-example-125bf64c4e49
+ Source code for article:  
+ https://medium.com/@kwokanthony/lu-decomposition-with-3x3-matrix-example-125bf64c4e49  
 
 ## Instruction
  - Matrix.py contains the Matrix Class and the function of LU decomposition.
