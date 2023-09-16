@@ -1,5 +1,10 @@
-# LU Decomposition Example
- Source code for article:  
+# Title
+LU Decomposition Example
+
+## Project Type
+*Side Project*
+
+## Related Article  
  https://medium.com/@kwokanthony/lu-decomposition-with-3x3-matrix-example-125bf64c4e49  
 
 ## Instruction
@@ -8,6 +13,6 @@
 
 ------------------------------------------------
  If you want to give me some support, follow me now!  
- LinkedIn: https://www.linkedin.com/in/anthony-kwok-6a2a20123/  
- Medium Page: https://medium.com/@kwokanthony  
- Github: https://github.com/anthonynamnam  
+ [LinkedIn](https://www.linkedin.com/in/anthonykwok073/) | 
+ [Medium](https://medium.com/@kwokanthony) | 
+ [Github](https://github.com/anthonynamnam)   
