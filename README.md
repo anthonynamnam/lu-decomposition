@@ -1,4 +1,4 @@
-# Title
+# Project Title
 LU Decomposition Example
 
 ## Project Type
